@@ -4,6 +4,8 @@
  */
 package pos.lyed;
 
+import pos.lyed.view.LayoutView;
+
 /**
  *
  * @author DinukaThemiya
@@ -14,7 +16,8 @@ public class PosLyed {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello");
+        new LayoutView().setVisible(true);
+        
     }
     
 }

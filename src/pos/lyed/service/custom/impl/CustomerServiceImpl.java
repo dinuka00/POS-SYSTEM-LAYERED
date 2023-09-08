@@ -4,7 +4,10 @@
  */
 package pos.lyed.service.custom.impl;
 
+import pos.lyed.dao.DaoFactory;
+import pos.lyed.dao.custom.CustomerDao;
 import pos.lyed.dto.CustomerDto;
+import pos.lyed.service.CustomerEntity;
 import pos.lyed.service.custom.CustomerService;
 
 /**
@@ -14,8 +17,27 @@ import pos.lyed.service.custom.CustomerService;
 public class CustomerServiceImpl implements CustomerService {
 
     
-    public String addCustomer(CustomerDto customerDto) throws Exception {
-        return null;
+    public String addCustomer(CustomerDto dto) throws Exception {
+        
+        CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.CUSTOMER);
+        
+        CustomerEntity ce = new CustomerEntity(dto.getId(),
+                dto.getTitle(),
+                dto.getName(),
+                dto.getDob(),
+                dto.getSalary(),
+                dto.getAddress(),
+                dto.getCity(),
+                dto.getProvince(),
+                dto.getZip());
+        
+        if(customerDao.addCustomer(ce)){
+            return "Successfully Added";
+        }else{
+            return "Fail";
+        }
+        
+        return  null;
     }
     
 }

@@ -5,37 +5,41 @@
 package pos.lyed.dao;
 
 import pos.lyed.dao.custom.impl.CustomerDaoImpl;
+import pos.lyed.dao.custom.impl.ItemDaoImpl;
 
 /**
  *
  * @author DinukaThemiya
  */
 public class DaoFactory {
-    
-    private static DaoFactory    daoFactory;
-    
-    private DaoFactory(){
-    
+
+    private static DaoFactory daoFactory;
+
+    private DaoFactory() {
+
     }
-    
-    public static DaoFactory getInstance(){
-        if(daoFactory == null){
+
+    public static DaoFactory getInstance() {
+        if (daoFactory == null) {
             daoFactory = new DaoFactory();
         }
-        return  daoFactory;
+        return daoFactory;
     }
-    
-    public SuperDao getDao(DaoTypes type){
+
+    public SuperDao getDao(DaoTypes type) {
         switch (type) {
             case CUSTOMER:
                 return new CustomerDaoImpl();
-                
+
+            case ITEM:
+                return new ItemDaoImpl();
+
             default:
                 throw new AssertionError();
         }
     }
-    
-    public enum DaoTypes{
-        CUSTOMER
+
+    public enum DaoTypes {
+        CUSTOMER, ITEM
     }
 }

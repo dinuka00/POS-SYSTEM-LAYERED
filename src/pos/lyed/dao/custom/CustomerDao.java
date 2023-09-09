@@ -4,15 +4,14 @@
  */
 package pos.lyed.dao.custom;
 
-import pos.lyed.dao.SuperDao;
-import pos.lyed.service.CustomerEntity;
+
+import pos.lyed.dao.CrudDao;
+import pos.lyed.entity.CustomerEntity;
 
 /**
  *
  * @author DinukaThemiya
  */
-public interface CustomerDao extends  SuperDao {
-    
-   Boolean addCustomer(CustomerEntity customerEntity) throws Exception;
-    
+public interface CustomerDao extends  CrudDao<CustomerEntity, String>{
+       
 }

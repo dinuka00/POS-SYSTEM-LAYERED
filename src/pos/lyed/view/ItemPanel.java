@@ -307,7 +307,11 @@ public class ItemPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void itemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemTableMouseClicked
-        searchItem();
+        try {
+            searchItem();
+        } catch (Exception ex) {
+            Logger.getLogger(ItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemTableMouseClicked
 
     private void descriptionTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionTextActionPerformed

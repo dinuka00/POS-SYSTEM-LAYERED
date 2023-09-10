@@ -4,6 +4,9 @@
  */
 package pos.lyed.view;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author DinukaThemiya
@@ -32,6 +35,7 @@ public class LayoutView extends javax.swing.JFrame {
         sideNavPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         manageItemButton = new javax.swing.JButton();
+        orderButton1 = new javax.swing.JButton();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,7 +65,7 @@ public class LayoutView extends javax.swing.JFrame {
 
         sideNavPanel.setBackground(new java.awt.Color(204, 153, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setBackground(new java.awt.Color(204, 204, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Manage Customer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +74,21 @@ public class LayoutView extends javax.swing.JFrame {
             }
         });
 
-        manageItemButton.setBackground(new java.awt.Color(255, 153, 153));
+        manageItemButton.setBackground(new java.awt.Color(204, 204, 255));
         manageItemButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         manageItemButton.setText("Manage Item");
         manageItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageItemButtonActionPerformed(evt);
+            }
+        });
+
+        orderButton1.setBackground(new java.awt.Color(204, 204, 255));
+        orderButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        orderButton1.setText("Order");
+        orderButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderButton1ActionPerformed(evt);
             }
         });
 
@@ -87,7 +100,8 @@ public class LayoutView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(sideNavPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                    .addComponent(manageItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
+                    .addComponent(manageItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(orderButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sideNavPanelLayout.setVerticalGroup(
@@ -97,7 +111,9 @@ public class LayoutView extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(manageItemButton)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(orderButton1)
+                .addContainerGap(369, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
@@ -151,8 +167,20 @@ public class LayoutView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void manageItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageItemButtonActionPerformed
-      loadItemPanel();
+        try {
+            loadItemPanel();
+        } catch (Exception ex) {
+            Logger.getLogger(LayoutView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_manageItemButtonActionPerformed
+
+    private void orderButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButton1ActionPerformed
+        try {
+            loadOrderPanel();
+        } catch (Exception ex) {
+            Logger.getLogger(LayoutView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_orderButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +193,7 @@ public class LayoutView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton manageItemButton;
+    private javax.swing.JButton orderButton1;
     private javax.swing.JPanel sideNavPanel;
     // End of variables declaration//GEN-END:variables
 
@@ -186,6 +215,16 @@ public class LayoutView extends javax.swing.JFrame {
 
         itemPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
         bodyPanel.add(itemPanel);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
+    private void loadOrderPanel() throws Exception {
+        bodyPanel.removeAll();
+        OrderPanel orderPanel = new OrderPanel();
+
+        orderPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(orderPanel);
         bodyPanel.repaint();
         bodyPanel.revalidate();
     }

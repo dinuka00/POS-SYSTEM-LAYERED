@@ -67,6 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
     
 
    
+    @Override
     public CustomerDto getCustomer(String id) throws Exception {
         CustomerEntity entity = customerDao.get(id);
         return new CustomerDto(entity.getId(),

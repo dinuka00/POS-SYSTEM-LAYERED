@@ -33,7 +33,8 @@ public class ItemDaoImpl implements ItemDao {
                 t.getDescription(),
                 t.getPackSize(),
                 t.getUnitPrice(),
-                t.getQoh());
+                t.getQoh(),
+                t.getId());
     }
 
     @Override

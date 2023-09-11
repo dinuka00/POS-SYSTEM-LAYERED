@@ -6,8 +6,10 @@ package pos.lyed.service;
 
 import pos.lyed.dto.CustomerDto;
 import pos.lyed.service.custom.ItemService;
+import pos.lyed.service.custom.OrderService;
 import pos.lyed.service.custom.impl.CustomerServiceImpl;
 import pos.lyed.service.custom.impl.ItemServiceImpl;
+import pos.lyed.service.custom.impl.OrderServiceImpl;
 
 /**
  *
@@ -34,6 +36,9 @@ public class ServiceFactory {
 
             case ITEM:
                 return new ItemServiceImpl();
+                
+             case ORDER:
+                return new OrderServiceImpl();
 
             default:
                 return null;
@@ -41,7 +46,7 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        CUSTOMER, ITEM
+        CUSTOMER, ITEM, ORDER
     }
 
 }

@@ -4,6 +4,8 @@
  */
 package pos.lyed.view;
 
+import java.awt.HeadlessException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -12,21 +14,23 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pos.lyed.controller.CustomerController;
 import pos.lyed.controller.ItemController;
+import pos.lyed.controller.OrderController;
 import pos.lyed.dto.CustomerDto;
 import pos.lyed.dto.ItemDto;
 import pos.lyed.dto.OrderDetailDto;
+import pos.lyed.dto.OrderDto;
 
 /**
  *
  * @author DinukaThemiya
  */
 public class OrderPanel extends javax.swing.JPanel {
-    
+
     private List<OrderDetailDto> orderDetailDtos = new ArrayList<>();
 
     private CustomerController customerController;
     private ItemController itemController;
-    
+    private OrderController orderController;
 
     /**
      * Creates new form OrderPanel
@@ -34,6 +38,7 @@ public class OrderPanel extends javax.swing.JPanel {
     public OrderPanel() {
         customerController = new CustomerController();
         itemController = new ItemController();
+        orderController = new OrderController();
         initComponents();
         loadTable();
     }
@@ -227,12 +232,12 @@ public class OrderPanel extends javax.swing.JPanel {
         tablePanelLayout.setHorizontalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
-                .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(placeOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(placeOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +292,7 @@ public class OrderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addItemButton1ActionPerformed
 
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
-       // placeOrder();
+        placeOrder();
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
 
@@ -385,6 +390,17 @@ public class OrderPanel extends javax.swing.JPanel {
         discountText.setText("");
         qtyText.setText("");
         itemDataLabel.setText("");
+    }
+
+    private void placeOrder() {
+        try {
+            OrderDto orderDto = new OrderDto(orderIdText.getText(), customerIdText.getText(), orderDetailDtos);
+
+            String result = orderController.placeOrder(orderDto);
+            JOptionPane.showMessageDialog(this, result);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

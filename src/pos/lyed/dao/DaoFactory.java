@@ -4,8 +4,11 @@
  */
 package pos.lyed.dao;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import pos.lyed.dao.custom.impl.CustomerDaoImpl;
 import pos.lyed.dao.custom.impl.ItemDaoImpl;
+import pos.lyed.dao.custom.impl.OrderDaoImpl;
+import pos.lyed.dao.custom.impl.OrderDetailDaoImpl;
 
 /**
  *
@@ -33,6 +36,10 @@ public class DaoFactory {
 
             case ITEM:
                 return new ItemDaoImpl();
+            case ORDER:
+                return new OrderDaoImpl();
+            case ORDER_DETAIL:
+                return new OrderDetailDaoImpl();
 
             default:
                 throw new AssertionError();
@@ -40,6 +47,6 @@ public class DaoFactory {
     }
 
     public enum DaoTypes {
-        CUSTOMER, ITEM
+        CUSTOMER, ITEM, ORDER, ORDER_DETAIL
     }
 }
